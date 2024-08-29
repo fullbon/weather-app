@@ -57,7 +57,7 @@ export async function dadata(search: string): Promise<City[]> {
     const data: DadataResponse = await response.json();
 
     return data.suggestions.map(s => ({
-        name: s.value,
+        name: s.data.city_with_type,
         lat: s.data.geo_lat,
         lon: s.data.geo_lon,
     }));

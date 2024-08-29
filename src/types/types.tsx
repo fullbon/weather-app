@@ -7,9 +7,8 @@ export type DadataItem = {
     value: string,
     restricted_value: string,
     data: {
-        area: string,
         city: string,
-        country: string,
+        city_with_type: string,
         geo_lat: string,
         geo_lon: string,
     }

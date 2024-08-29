@@ -45,7 +45,7 @@ export default function SelectCity(props: SelectCityProps) {
         onSelectionChange={handleChange}
     >
         {(item) => (
-            <AutocompleteItem key={item.name} className="capitalize">
+            <AutocompleteItem key={item.name}>
                 {item.name}
             </AutocompleteItem>
         )}

@@ -2,26 +2,35 @@
 
 import * as React from 'react';
 import {Autocomplete, AutocompleteItem} from "@nextui-org/autocomplete";
-import { Location } from '@/types/types';
-import { request } from '@/api/request';
+import { City } from '@/types/types';
+import { dadata } from '@/lib/actions';
+import { useDebouncedCallback } from 'use-debounce';
 
 type SelectCityProps = {
-    onChange: (location: Location) => void
+    onChange: (city: City) => void
 }
 
 export default function SelectCity(props: SelectCityProps) {
     const [search, setSearch] = React.useState<string>('');
     const [loading, setLoading] = React.useState<boolean>(false);
-    const [options, setOptions] = React.useState([{name: 'Москва'}]);
+    const [options, setOptions] = React.useState<City[]>([]);
 
-    const loadOptions = () => {
+    const loadOptions = useDebouncedCallback((query: string) => {
         setLoading(true);
-        request('')
-        setLoading(false);
+        dadata(search).then(cities => {
+            setOptions(cities);
+            setLoading(false);
+        })
+    }, 300);
+
+    const handleChange = (key) => {
+        props.onChange(
+            options.find(o => o.name === key) ?? null
+        );
     }
 
     React.useEffect(() => {
-        loadOptions()
+        loadOptions(search);
     }, [search]);
 
     return <Autocomplete
@@ -33,6 +42,7 @@ export default function SelectCity(props: SelectCityProps) {
         placeholder="Начните писать..."
         variant="bordered"
         onInputChange={setSearch}
+        onSelectionChange={handleChange}
     >
         {(item) => (
             <AutocompleteItem key={item.name} className="capitalize">

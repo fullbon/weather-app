@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import {Autocomplete, AutocompleteItem} from "@nextui-org/autocomplete";
-import { City } from '@/types/types';
+import { City } from '@/types/weather/types';
 import { dadataRequest } from '@/lib/weather/actions';
 import { useDebouncedCallback } from 'use-debounce';
 

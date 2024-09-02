@@ -1,6 +1,6 @@
 'use client';
 
-import { City, WeatherResponse } from '@/types/types';
+import { City, WeatherResponse } from '@/types/weather/types';
 import { weatherRequest } from '@/lib/weather/actions';
 import * as React from 'react';
 import { Link } from '@nextui-org/link';

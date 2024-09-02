@@ -3,7 +3,7 @@ import { Link } from '@nextui-org/link';
 
 type Props = {
     onClick: Function,
-    children: React.ReactElement
+    children: React.ReactElement | string
 }
 
 export default function BackButton(props: Props) {

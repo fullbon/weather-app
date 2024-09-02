@@ -3,7 +3,7 @@
 import * as React from 'react';
 import {Autocomplete, AutocompleteItem} from "@nextui-org/autocomplete";
 import { City } from '@/types/types';
-import { dadataRequest } from '@/lib/actions';
+import { dadataRequest } from '@/lib/weather/actions';
 import { useDebouncedCallback } from 'use-debounce';
 
 type SelectCityProps = {
@@ -23,7 +23,7 @@ export default function SelectCity(props: SelectCityProps) {
         })
     }, 300);
 
-    const handleChange = (key) => {
+    const handleChange = (key: string) => {
         props.onChange(
             options.find(o => o.name === key) ?? null
         );

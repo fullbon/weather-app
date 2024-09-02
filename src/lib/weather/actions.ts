@@ -45,7 +45,7 @@ export async function weatherRequest(city: City): Promise<WeatherResponse> {
         + '&lang=ru'
         + '&units=metric'
         + '&appid=' + process.env.OPEN_WEATHER_MAP_API_KEY;
-console.log(url);
+
     const response = await fetch(
         url,
         {

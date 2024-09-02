@@ -1,59 +1,30 @@
-'use server'
+'use server';
 
-import { RequestInit } from 'undici-types/fetch';
-import { City, DadataResponse } from '@/types/types';
+import { City, DadataResponse, WeatherResponse } from '@/types/types';
 
-const request = async (
-    url: string,
-    { method = 'GET', data = undefined, headers = {} }: RequestInit
-) => {
-    let body: string = '';
-
-    if (data !== undefined) {
-        if (method === 'GET') {
-            const queryParams = new URLSearchParams(data).toString();
-
-            if (queryParams !== '') {
-                url += '?' + queryParams;
-            }
-        } else {
-            body = JSON.stringify(data);
-        }
+export async function dadataRequest(search: string): Promise<City[]> {
+    if (!process.env.DADATA_API_URL) {
+        throw new Error('Укажите путь к DaData');
     }
 
-    if (headers['Content-Type'] === undefined) {
-        headers['Content-Type'] = 'application/json';
+    const url: string = process.env.DADATA_API_URL;
+    const method = 'POST';
+    const body = {
+        query: search,
+        from_bound: { value: "city" },
+        to_bound: { value: "city" }
+    };
+    const headers = {
+        "Authorization": "Token " + process.env.DADATA_API_KEY,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
     }
 
-    if (headers['Accept'] === undefined) {
-        headers['Accept'] = 'application/json';
-    }
-
-    return await fetch(
+    const response = await fetch(
         url,
-        {
-            method,
-            headers,
-            body,
-        }
+        { method, body: JSON.stringify(body), headers }
     );
-};
 
-export async function dadata(search: string): Promise<City[]> {
-    const response = await request(
-        process.env.DADATA_API_URL,
-        {
-            method: 'POST',
-            data: {
-                query: search,
-                from_bound: { value: "city" },
-                to_bound: { value: "city" }
-            },
-            headers: {
-                "Authorization": "Token " + process.env.DADATA_API_KEY
-            }
-        }
-    )
     const data: DadataResponse = await response.json();
 
     return data.suggestions.map(s => ({
@@ -61,4 +32,25 @@ export async function dadata(search: string): Promise<City[]> {
         lat: s.data.geo_lat,
         lon: s.data.geo_lon,
     }));
+}
+
+export async function weatherRequest(city: City): Promise<WeatherResponse> {
+    if (!process.env.OPEN_WEATHER_MAP_API_URL) {
+        throw new Error('Укажите путь к OpenWeatherMap');
+    }
+
+    const url = process.env.OPEN_WEATHER_MAP_API_URL
+        + '?lat=' + city.lat
+        + '&lon=' + city.lon
+        + '&lang=ru'
+        + '&units=metric'
+        + '&appid=' + process.env.OPEN_WEATHER_MAP_API_KEY;
+console.log(url);
+    const response = await fetch(
+        url,
+        {
+            method: 'GET',
+        }
+    );
+    return await response.json();
 }

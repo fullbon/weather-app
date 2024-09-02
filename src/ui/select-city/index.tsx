@@ -3,7 +3,7 @@
 import * as React from 'react';
 import {Autocomplete, AutocompleteItem} from "@nextui-org/autocomplete";
 import { City } from '@/types/types';
-import { dadata } from '@/lib/actions';
+import { dadataRequest } from '@/lib/actions';
 import { useDebouncedCallback } from 'use-debounce';
 
 type SelectCityProps = {
@@ -17,7 +17,7 @@ export default function SelectCity(props: SelectCityProps) {
 
     const loadOptions = useDebouncedCallback((query: string) => {
         setLoading(true);
-        dadata(search).then(cities => {
+        dadataRequest(search).then(cities => {
             setOptions(cities);
             setLoading(false);
         })

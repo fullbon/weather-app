@@ -4,7 +4,7 @@ const {nextui} = require("@nextui-org/theme");
 module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/components/(autocomplete|link|button|ripple|spinner|input|listbox|divider|popover|scroll-shadow).js"
+    "./node_modules/@nextui-org/theme/dist/components/(autocomplete|link|spinner|button|ripple|input|listbox|divider|popover|scroll-shadow).js"
   ],
   theme: {
     extend: {},

@@ -10,7 +10,7 @@ export default function Product({ product }: ProductCardProps) {
     return <div className={'flex m-10 w-80 h-80 group relative shadow-lg hover:shadow-2xl transition delay-10 '}>
         <div className={'w-fit h-[100%] p-5 flex flex-wrap items-center content-between justify-center cursor-pointer'}>
             <div className={'h-[55%] mt-5'}>
-                <div className={'w-fit h-full m-auto'}><Image className={'w-fit h-full'} src={product.image} alt={product.description} /></div>
+                <div className={'w-fit h-full m-auto'}><img className={'w-fit h-full'} src={product.image} alt={product.description} /></div>
             </div>
             <div className={'w-full'}>
                 <div className={'py-2 text-sm'}>{product.title}</div>

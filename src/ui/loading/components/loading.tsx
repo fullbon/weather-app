@@ -6,7 +6,7 @@ type Props = {
 }
 
 export default function Loading(props: Props) {
-    return <div>
+    return <div className={'h-[60vh] flex justify-center'}>
         <Spinner size="lg" color="success" label={props.label ?? 'Загрузка'} />
     </div>
 }

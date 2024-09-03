@@ -23,6 +23,8 @@ export type ShopState = {
 
 export type ShopActions = {
     fetchCategories: () => void,
+    fetchProducts: (category: string) => void,
+    clearProducts: () => void
 };
 
 export type ShopStore = ShopState & ShopActions;

@@ -1,6 +1,9 @@
 import { createStore } from 'zustand/vanilla';
 import { ShopState, ShopStore } from '@/types/shop';
-import { fetchCategoriesFromFakeShop } from '@/lib/shop/actions';
+import {
+    fetchCategoriesFromFakeShop,
+    fetchProductsFromFakeShop,
+} from '@/lib/shop/actions';
 
 export const defaultInitState: ShopState = {
     categories: [],
@@ -14,10 +17,12 @@ export const createShopStore = (
         ...initState,
         fetchCategories: () => {
             fetchCategoriesFromFakeShop()
-                .then(categories => {
-                    console.log({ categories })
-                    return set((state) => ({categories}))
-                })
+                .then(categories => set((state) => ({categories})))
         },
+        fetchProducts: (category: string) => {
+            fetchProductsFromFakeShop(category)
+                .then(products => set((state) => ({products})))
+        },
+        clearProducts: () => set((state) => ({products: []}))
     }));
 };

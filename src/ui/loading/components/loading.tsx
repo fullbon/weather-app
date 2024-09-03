@@ -7,6 +7,6 @@ type Props = {
 
 export default function Loading(props: Props) {
     return <div>
-        <Spinner size="xl" color="success" label={props.label ?? 'Загрузка'} />
+        <Spinner size="lg" color="success" label={props.label ?? 'Загрузка'} />
     </div>
 }

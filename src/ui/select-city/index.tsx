@@ -2,9 +2,10 @@
 
 import * as React from 'react';
 import {Autocomplete, AutocompleteItem} from "@nextui-org/autocomplete";
-import { City } from '@/types/weather/types';
+import { City } from '@/types/weather';
 import { dadataRequest } from '@/lib/weather/actions';
 import { useDebouncedCallback } from 'use-debounce';
+import { Key } from '@react-types/shared';
 
 type SelectCityProps = {
     onChange: (city: City) => void
@@ -23,14 +24,16 @@ export default function SelectCity(props: SelectCityProps) {
         })
     }, 300);
 
-    const handleChange = (key: string) => {
-        props.onChange(
-            options.find(o => o.name === key) ?? null
-        );
+    const handleChange = (key: Key | null) => {
+        const city = options.find(o => o.name === key);
+        if (city) {
+            props.onChange(city);
+        }
     }
 
     React.useEffect(() => {
         loadOptions(search);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search]);
 
     return <Autocomplete

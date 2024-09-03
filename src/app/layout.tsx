@@ -8,11 +8,11 @@ import { Link } from '@nextui-org/link';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'Weather app',
-    description: 'Приложение погоды с поиском по городу',
+    title: 'Портфолио',
+    description: 'Пет проекты для самообучения',
 };
 
-export default function RootLayout({
+export default function ProjectLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;

@@ -1,6 +1,6 @@
 'use server';
 
-import { City, DadataResponse, WeatherResponse } from '@/types/weather/types';
+import { City, DadataResponse, WeatherResponse } from '@/types/weather';
 
 export async function dadataRequest(search: string): Promise<City[]> {
     if (!process.env.DADATA_API_URL) {

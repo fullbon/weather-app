@@ -1,6 +1,6 @@
 'use client';
 
-import { City, WeatherResponse } from '@/types/weather/types';
+import { City, WeatherResponse } from '@/types/weather';
 import { weatherRequest } from '@/lib/weather/actions';
 import * as React from 'react';
 import { Link } from '@nextui-org/link';
@@ -24,6 +24,7 @@ export default function Weather(props: Props) {
 
     React.useEffect(() => {
         getWeather();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     if (loading || weather === null) {

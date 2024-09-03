@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import SelectCity from '@/ui/select-city';
-import { City } from '@/types/weather/types';
+import { City } from '@/types/weather';
 import { Button } from '@nextui-org/button';
 import Weather from '@/ui/weather';
 import BackButton from '@/ui/back-button';
